@@ -1,3 +1,4 @@
+import com.moowork.gradle.node.npm.NpmTask
 import com.moowork.gradle.node.yarn.YarnTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
@@ -84,7 +85,8 @@ tasks.withType<KotlinCompile> {
 task<YarnTask>("appInstall") {
     description = "Installs all dependencies from package.json"
     setWorkingDir(file("${project.projectDir}/src/main/app"))
-    args = listOf("install")
+    //rgs = listOf("install")
+    this.setArgs(listOf("install"))
 }
 
 task<YarnTask>("appBuild") {

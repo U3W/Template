@@ -1,11 +1,23 @@
 {
-  "name": "my-app",
+  "name": "easypass",
   "version": "0.1.0",
-  "private": true,
+  "bin": {
+    "create-wasm-app": ".bin/create-wasm-app.js"
+  },
+  "private": false,
+  "license": "(MIT OR Apache-2.0)",
+  "contributors": [
+    "Kacper Urbaniec <at.kacper.urbaniec@gmail.com>",
+    "Sebastian Wahl <swahl@student.tgm.ac.at>",
+    "Moritz Welsch <mwelsch@student.tgm.ac.at>",
+    "Martin Wustinger <mwustinger@student.tgm.ac.at>"
+  ],
   "dependencies": {
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
-    "react-scripts": "3.2.0"
+    "react-scripts": "3.2.0",
+    "@wasm-tool/wasm-pack-plugin": "0.1.6",
+    "wasm-easypass": "../rust/pkg"
   },
   "scripts": {
     "start": "react-scripts start",
