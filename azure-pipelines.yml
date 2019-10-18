@@ -1,12 +1,15 @@
-# Starter pipeline
+# EasyPass Pipeline
 trigger:
-- master
+  branches:
+    include:
+    - '*'
 
 pool:
   vmImage: 'ubuntu-latest'
 
 jobs:
  - job: Test_WebService
+   displayName: "Test_WebService"
    steps:
     - template: _azure-pipelines/rust.yml
       parameters:
@@ -40,4 +43,48 @@ jobs:
         publishJUnitResults: false
         javaHomeOption: 'JDKVersion'
         sonarQubeRunAnalysis: false
-      displayName: Testing Application
+      displayName: Testing Spring
+
+ - job: Test_AuthService
+   displayName: "Test_AuthService"
+   steps:
+    - task: Gradle@2
+      inputs:
+        gradleWrapperFile: '$(Build.SourcesDirectory)/AuthService/gradlew'
+        workingDirectory: '$(Build.SourcesDirectory)/AuthService'
+        tasks: 'build'
+        publishJUnitResults: false
+        javaHomeOption: 'JDKVersion'
+        sonarQubeRunAnalysis: false
+      displayName: Building Spring 
+    - task: Gradle@2
+      inputs:
+        gradleWrapperFile: '$(Build.SourcesDirectory)/AuthService/gradlew'
+        workingDirectory: '$(Build.SourcesDirectory)/AuthService'
+        tasks: 'test'
+        publishJUnitResults: false
+        javaHomeOption: 'JDKVersion'
+        sonarQubeRunAnalysis: false
+      displayName: Testing Spring
+
+ - job: Test_DiscoveryService
+   displayName: "Test_DiscoveryService"
+   steps:
+    - task: Gradle@2
+      inputs:
+        gradleWrapperFile: '$(Build.SourcesDirectory)/DiscoveryService/gradlew'
+        workingDirectory: '$(Build.SourcesDirectory)/DiscoveryService'
+        tasks: 'build'
+        publishJUnitResults: false
+        javaHomeOption: 'JDKVersion'
+        sonarQubeRunAnalysis: false
+      displayName: Building Spring 
+    - task: Gradle@2
+      inputs:
+        gradleWrapperFile: '$(Build.SourcesDirectory)/DiscoveryService/gradlew'
+        workingDirectory: '$(Build.SourcesDirectory)/DiscoveryService'
+        tasks: 'test'
+        publishJUnitResults: false
+        javaHomeOption: 'JDKVersion'
+        sonarQubeRunAnalysis: false
+      displayName: Testing Spring
