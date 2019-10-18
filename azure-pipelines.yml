@@ -12,6 +12,7 @@ jobs:
       parameters:
         toolchain: nightly
     - template: _azure-pipelines/geckodriver.yml
+    - template: _azure-pipelines/wasm-pack.yml
 
     - script: |
         cd $(Build.SourcesDirectory)/WebService/src/main/rust
