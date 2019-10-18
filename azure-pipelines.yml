@@ -5,29 +5,39 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+jobs:
+ - job: Test_WebService
+   steps:
+    - template: ci/azure-install-rust.yml
+      parameters:
+        toolchain: beta
+    - template: ci/azure-install-node.yml
+    - template: ci/azure-install-geckodriver.yml
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+    - script: |
+        cd $(Build.SourcesDirectory)/WebService/src/main/rust
+        wasm-pack build
+      displayName: 'Building WebAssembly'
 
-- script: |
-    cd ./WebService
-    echo "ls"
-    ls 
-    echo "ls ende"
-    ./gradlew build
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
-
-- task: Gradle@2
-  inputs:
-    gradleWrapperFile: '$(Build.SourcesDirectory)/WebService/gradlew'
-    workingDirectory: '$(Build.SourcesDirectory)/WebService'
-    tasks: 'build'
-    publishJUnitResults: false
-    javaHomeOption: 'JDKVersion'
-    sonarQubeRunAnalysis: false
+    - script: |
+        cd $(Build.SourcesDirectory)/WebService/src/main/rust
+        wasm-pack test --headless --firefox
+      displayName: 'Testing WebAssembly'
+    - task: Gradle@2
+      inputs:
+        gradleWrapperFile: '$(Build.SourcesDirectory)/WebService/gradlew'
+        workingDirectory: '$(Build.SourcesDirectory)/WebService'
+        tasks: 'build appInstall appBuild appCopy'
+        publishJUnitResults: false
+        javaHomeOption: 'JDKVersion'
+        sonarQubeRunAnalysis: false
+      displayName: Building Spring with React
+    - task: Gradle@2
+      inputs:
+        gradleWrapperFile: '$(Build.SourcesDirectory)/WebService/gradlew'
+        workingDirectory: '$(Build.SourcesDirectory)/WebService'
+        tasks: 'test'
+        publishJUnitResults: false
+        javaHomeOption: 'JDKVersion'
+        sonarQubeRunAnalysis: false
+      displayName: Testing Application
