@@ -19,11 +19,10 @@ class Controller {
         return "index"
     }
 
-    @RequestMapping(value = ["/baum"])
+    @RequestMapping(value = ["/test"])
     @ResponseBody
     fun index2(): String {
-        print("baum")
-        return "index"
+        return "<h1>Test!</h1>"
     }
 
 
