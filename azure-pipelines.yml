@@ -52,7 +52,7 @@ jobs:
       inputs:
         gradleWrapperFile: '$(Build.SourcesDirectory)/AuthService/gradlew'
         workingDirectory: '$(Build.SourcesDirectory)/AuthService'
-        tasks: 'build appInstall appBuild appCopy'
+        tasks: 'build'
         publishJUnitResults: false
         javaHomeOption: 'JDKVersion'
         sonarQubeRunAnalysis: false
@@ -74,7 +74,7 @@ jobs:
       inputs:
         gradleWrapperFile: '$(Build.SourcesDirectory)/DiscoveryService/gradlew'
         workingDirectory: '$(Build.SourcesDirectory)/DiscoveryService'
-        tasks: 'build appInstall appBuild appCopy'
+        tasks: 'build'
         publishJUnitResults: false
         javaHomeOption: 'JDKVersion'
         sonarQubeRunAnalysis: false
