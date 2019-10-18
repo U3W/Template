@@ -16,8 +16,7 @@ steps:
 
 - task: Gradle@2
   inputs:
-    gradleWrapperFile: 'gradlew'
-    workingDirectory: './WebService'
+    gradleWrapperFile: './WebService/gradlew'
     tasks: 'build'
     publishJUnitResults: false
     javaHomeOption: 'JDKVersion'
