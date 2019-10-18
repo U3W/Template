@@ -14,10 +14,14 @@ steps:
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
 
+- script: |
+    ls
+  displayName: 'ls'
+
 - task: Gradle@2
   inputs:
     gradleWrapperFile: 'gradlew'
-    workingDirectory: 'WebService'
+    workingDirectory: ''
     tasks: 'build'
     publishJUnitResults: false
     javaHomeOption: 'JDKVersion'
