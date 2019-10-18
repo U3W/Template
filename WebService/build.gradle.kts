@@ -105,12 +105,21 @@ task<Copy>("appCopy") {
         into("build/resources/main/static/")
     }
     copy {
+        from("src/main/app/build")
+        into("src/main/resources/static/")
+    }
+    copy {
         from(File("src/main/app/build/index.html"))
         into("out/production/resources/main/templates")
     }
     copy {
         from(File("src/main/app/build/index.html"))
         into("build/resources/main/templates")
+    }
+
+    copy {
+        from(File("src/main/app/build/index.html"))
+        into("src/main/resources/templates")
     }
 }
 

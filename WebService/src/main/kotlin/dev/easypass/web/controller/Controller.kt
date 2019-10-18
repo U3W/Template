@@ -23,7 +23,7 @@ class Controller {
     @ResponseBody
     fun index2(): String {
         print("baum")
-        return "index4"
+        return "index"
     }
 
 
