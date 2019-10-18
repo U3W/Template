@@ -1,7 +1,0 @@
-test/fixtures
-test/__expected__
-
-src/workers/InlineWorker.js
-
-/node_modules
-/dist
