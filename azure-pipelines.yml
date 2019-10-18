@@ -10,7 +10,7 @@ jobs:
    steps:
     - template: ci/azure-install-rust.yml
       parameters:
-        toolchain: beta
+        toolchain: nightly
     - template: ci/azure-install-node.yml
     - template: ci/azure-install-geckodriver.yml
 
