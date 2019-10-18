@@ -14,6 +14,12 @@ steps:
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
 
+- script: |
+    cd ./WebService
+    gradle build
+    echo See https://aka.ms/yaml
+  displayName: 'Run a multi-line script'
+
 - task: Gradle@2
   inputs:
     gradleWrapperFile: '$(Build.SourcesDirectory)/WebService/gradlew'
