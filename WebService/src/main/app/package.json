@@ -17,7 +17,8 @@
     "react-dom": "^16.10.2",
     "react-scripts": "3.2.0",
     "@wasm-tool/wasm-pack-plugin": "0.1.6",
-    "wasm-easypass": "../rust/pkg"
+    "wasm-easypass": "../rust/pkg",
+    "worker-loader": "2.0.0"
   },
   "scripts": {
     "start": "react-app-rewired start",
