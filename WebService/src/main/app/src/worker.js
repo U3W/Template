@@ -1,6 +1,5 @@
 import("../pkg").then(wasm => {
     //wasm.init();
-    var self = this;
     self.addEventListener('message', function(e) {
         var data = e.data;
         const controller = new wasm.Worker();

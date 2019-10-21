@@ -18,6 +18,7 @@ module.exports = function override(config, env) {
         });
     });
 
+
     // Add a dedicated loader for WASM
     config.module.rules.push({
         test: wasmExtensionRegExp,
@@ -53,12 +54,6 @@ module.exports = function override(config, env) {
     const workerConfig = {
         entry: "./src/worker.js",
         target: "webworker",
-        plugins: [
-            new WasmPackPlugin({
-                crateDirectory: path.resolve(__dirname, "../rust"),
-                outDir: "pkg"
-            })
-        ],
         resolve: {
             extensions: [".js", ".wasm"]
         },
@@ -71,33 +66,7 @@ module.exports = function override(config, env) {
 
     config = [tmp, workerConfig];
 
-
-
-    /**
-    if (!config.plugins) {
-        config.plugins = [];
-    }
-    config.plugins.push(
-        new WorkerPlugin()
-    );*/
-
-
-    /**
-    config.entry = "./src/worker.js";
-    config.target = "webworker";
-    config.plugins.push(
-        new WasmPackPlugin({
-            crateDirectory: path.resolve(__dirname, "../rust"),
-            outDir: "pkg",
-        })
-    );
-    config.resolve = { extensions: [".js", ".wasm"] };
-    config.output = {
-            path: path.resolve(__dirname, "dist"),
-            filename:
-                "worker.js"
-        };
-    config.mode = "development";*/
-
     return config;
 };
+
+console.log(path.resolve(__dirname, "../rust"));
