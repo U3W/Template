@@ -131,12 +131,12 @@ task<Exec>("wasmBuild") {
 
     workingDir = File("src/main/rust")
     commandLine = if (System.getProperty("os.name").toLowerCase().contains("windows")) {
-        listOf("cmd", "/c", "wasm-pack build")
+        listOf("cmd", "/c", "wasm-pack", "build")
     } else {
-        listOf("wasm-pack build")
+        listOf("wasm-pack", "build")
     }
     copy {
-        from(File("src/main/rust/pkg"))
+        from("src/main/rust/pkg")
         into("src/main/app/pkg")
     }
 }
