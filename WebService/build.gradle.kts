@@ -95,18 +95,27 @@ task<NpmTask>("appBuild") {
     setArgs(listOf("run", "build"))
 }
 
+task<NpmTask>("appTest") {
+    description = "Runs all tests of the webapp"
+    setWorkingDir(file("${project.projectDir}/src/main/app"))
+    setArgs(listOf("test"))
+}
+
 task("appCopy") {
     copy {
         from("src/main/app/build")
         into("out/production/resources/main/static/")
+        exclude("index.html")
     }
     copy {
         from("src/main/app/build")
         into("build/resources/main/static/")
+        exclude("index.html")
     }
     copy {
         from("src/main/app/build")
         into("src/main/resources/static/")
+        exclude("index.html")
     }
     copy {
         from(File("src/main/app/build/index.html"))

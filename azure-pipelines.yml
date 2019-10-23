@@ -44,6 +44,15 @@ jobs:
       inputs:
         gradleWrapperFile: '$(Build.SourcesDirectory)/WebService/gradlew'
         workingDirectory: '$(Build.SourcesDirectory)/WebService'
+        tasks: 'appTest'
+        publishJUnitResults: false
+        javaHomeOption: 'JDKVersion'
+        sonarQubeRunAnalysis: false
+      displayName: Testing React 
+    - task: Gradle@2
+      inputs:
+        gradleWrapperFile: '$(Build.SourcesDirectory)/WebService/gradlew'
+        workingDirectory: '$(Build.SourcesDirectory)/WebService'
         tasks: 'test'
         publishJUnitResults: false
         javaHomeOption: 'JDKVersion'

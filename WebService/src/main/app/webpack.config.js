@@ -1,6 +1,8 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
+const CopyWebPackPlugin = require("copy-webpack-plugin");
 const path = require('path');
 
+// Configure React-App
 const appConfig = {
   module: {
     rules: [
@@ -25,13 +27,17 @@ const appConfig = {
     new HtmlWebPackPlugin({
       template: "./src/index.html",
       filename: "./index.html"
-    })
+    }),
+    new CopyWebPackPlugin([
+      { from: "public" }
+    ])
   ],
   output: {
     path: path.resolve(__dirname, "build")
   }
 };
 
+// Configure WebWorker with WebAssembly
 const workerConfig = {
   entry: "./src/worker.js",
   target: "webworker",
