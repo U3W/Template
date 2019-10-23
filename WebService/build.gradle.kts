@@ -82,20 +82,20 @@ tasks.withType<KotlinCompile> {
     }
 }
 
-task<YarnTask>("appInstall") {
+task<NpmTask>("appInstall") {
     description = "Installs all dependencies from package.json"
     setWorkingDir(file("${project.projectDir}/src/main/app"))
     //rgs = listOf("install")
-    this.setArgs(listOf("install"))
+    setArgs(listOf("install"))
 }
 
-task<YarnTask>("appBuild") {
+task<NpmTask>("appBuild") {
     description = "Builds production version of the webapp"
     setWorkingDir(file("${project.projectDir}/src/main/app"))
-    args = listOf("run", "build")
+    setArgs(listOf("run", "build"))
 }
 
-task<Copy>("appCopy") {
+task("appCopy") {
     copy {
         from("src/main/app/build")
         into("out/production/resources/main/static/")
@@ -122,5 +122,24 @@ task<Copy>("appCopy") {
         into("src/main/resources/templates")
     }
 }
+
+task<Exec>("wasmBuild") {
+    val folder = File("src/main/app/pkg")
+    if( !folder.exists() ) {
+        folder.mkdirs()
+    }
+
+    workingDir = File("src/main/rust")
+    commandLine = if (System.getProperty("os.name").toLowerCase().contains("windows")) {
+        listOf("cmd", "/c", "wasm-pack build")
+    } else {
+        listOf("wasm-pack build")
+    }
+    copy {
+        from(File("src/main/rust/pkg"))
+        into("src/main/app/pkg")
+    }
+}
+
 
 

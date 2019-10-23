@@ -17,9 +17,14 @@ jobs:
     - template: _azure-pipelines/geckodriver.yml
     - template: _azure-pipelines/wasm-pack.yml
 
-    - script: |
-        cd $(Build.SourcesDirectory)/WebService/src/main/rust
-        wasm-pack build --out-dir ../app/pkg
+    - task: Gradle@2
+      inputs:
+        gradleWrapperFile: '$(Build.SourcesDirectory)/WebService/gradlew'
+        workingDirectory: '$(Build.SourcesDirectory)/WebService'
+        tasks: 'wasmBuild'
+        publishJUnitResults: false
+        javaHomeOption: 'JDKVersion'
+        sonarQubeRunAnalysis: false
       displayName: 'Building WebAssembly'
 
     - script: |
